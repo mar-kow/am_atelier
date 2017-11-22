@@ -1,7 +1,10 @@
 class Book < ApplicationRecord
   has_many :reservations
   has_many :borrowers, through: :reservations, source: :user
-  belongs_to :category
+
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category, class_name: 'Category', foreign_key: 'category_id'
+
 
   # statuses: AVAILABLE, TAKEN, RESERVED, EXPIRED, CANCELED, RETURNED
 
